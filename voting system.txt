@@ -1,0 +1,69 @@
+def real_time_voting():
+    candidates = []
+    num_candidates = int(input("Enter the number of candidates: "))
+    
+    # Collect candidate names
+    for i in range(num_candidates):
+        name = input(f"Enter name of candidate {i + 1}: ")
+        candidates.append({"name": name, "votes": 0})
+    
+    print("\nVoting Started. Type 'exit' to stop voting.")
+    
+    while True:
+        print("\nCandidates: " + ", ".join([candidate['name'] for candidate in candidates]))
+        vote = input("Enter the name of the candidate you want to vote for (or 'exit' to stop): ").capitalize()
+        
+        if vote == "Exit":
+            break
+        
+        # Check if valid candidate
+        valid_vote = False
+        for candidate in candidates:
+            if candidate['name'].lower() == vote.lower():
+                candidate['votes'] += 1
+                valid_vote = True
+                print(f"Vote for {vote} has been counted.")
+                break
+        
+        if not valid_vote:
+            print("Invalid candidate. Please try again.")
+    
+    print("\nFinal Voting Results:")
+    for candidate in candidates:
+        print(f"{candidate['name']}: {candidate['votes']} votes")
+
+real_time_voting()
+
+
+
+
+Sample Output:
+
+vbnet
+Copy code
+Enter the number of candidates: 3
+Enter name of candidate 1: Alice
+Enter name of candidate 2: Bob
+Enter name of candidate 3: Charlie
+
+Voting Started. Type 'exit' to stop voting.
+
+Candidates: Alice, Bob, Charlie
+Enter the name of the candidate you want to vote for (or 'exit' to stop): Alice
+Vote for Alice has been counted.
+
+Candidates: Alice, Bob, Charlie
+Enter the name of the candidate you want to vote for (or 'exit' to stop): Bob
+Vote for Bob has been counted.
+
+Candidates: Alice, Bob, Charlie
+Enter the name of the candidate you want to vote for (or 'exit' to stop): Charlie
+Vote for Charlie has been counted.
+
+Candidates: Alice, Bob, Charlie
+Enter the name of the candidate you want to vote for (or 'exit' to stop): exit
+
+Final Voting Results:
+Alice: 1 votes
+Bob: 1 votes
+Charlie: 1 votes
